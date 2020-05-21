@@ -19,7 +19,7 @@ Imagem docker para ambiente de desenvolvimento local do Airflow.
 ## Volumes
 
 * os arquivos de banco ficam persistidos em ```./mnt/pgdata```
-* as dags devem ser colocadas em um diretório paralelo a este chamado **dag**. Ou seja o Airflow está preparado para carregar as dags no diretório ```../dags```
+* as dags devem estar em um diretório paralelo a este chamado **airflow-dag**. Ou seja o Airflow está preparado para carregar as dags no diretório ```../airflow-dags```
 
 ## Clonando o repositório de dags
 
@@ -27,7 +27,7 @@ A partir deste diretório, execute:
 
 ```$ cd ..```
 
-```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git dags```
+```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
 
 Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório com o nome dags
 
