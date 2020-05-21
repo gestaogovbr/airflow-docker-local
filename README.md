@@ -2,7 +2,7 @@
 
 Imagem docker para ambiente de desenvolvimento local do Airflow.
 
-## Preparação
+## Preparação e execução
 
 1. Instalar Docker CE [aqui!](https://docs.docker.com/get-docker/)
 2. Clonar o repositório [airflow-docker-local](https://git.economia.gov.br/seges-cginf/airflow-docker-local) na máquina
@@ -19,7 +19,17 @@ Imagem docker para ambiente de desenvolvimento local do Airflow.
 ## Volumes
 
 * os arquivos de banco ficam persistidos em ```./mnt/pgdata```
-* as dags devem ser colocadas em ```./mnt/dags```
+* as dags devem ser colocadas em um diretório paralelo a este chamado **dag**. Ou seja o Airflow está preparado para carregar as dags no diretório ```../dags```
+
+## Clonando o repositório de dags
+
+A partir deste diretório, execute:
+
+```$ cd ..```
+
+```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git dags```
+
+Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório com o nome dags
 
 ## Instalação de bibliotecas
 
