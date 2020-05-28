@@ -91,7 +91,8 @@ RUN set -ex \
     # && source ~/.bashrc
     # pacotes para ctds
     && apt-get update \
-    && apt-get install -yqq freetds-dev
+    && apt-get install -yqq freetds-dev \
+    && sed -i -e 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
 
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
