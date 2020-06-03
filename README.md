@@ -29,7 +29,7 @@ A partir deste diretório, execute:
 
 ```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
 
-Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório com o nome dags
+Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente
 
 ## Instalação de bibliotecas
 
