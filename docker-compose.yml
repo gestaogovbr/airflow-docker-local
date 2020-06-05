@@ -31,6 +31,11 @@ services:
             - ../airflow-dags/dags:/usr/local/airflow/dags
             - ./requirements.txt:/requirements.txt
             # - ./plugins:/usr/local/airflow/plugins
+            - /var/run/docker.sock:/var/run/docker.sock
+            # Linux
+            - /usr/bin/docker:/bin/docker:ro
+            # Mac
+            # - /usr/local/bin/docker:/bin/docker:ro
         ports:
             - "8080:8080"
         command: webserver
