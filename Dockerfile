@@ -22,6 +22,7 @@ ARG PYTHON_DEPS=" \
     pyodbc==4.0.30 \
     xlrd==1.2.0 \
     docker==4.2.1 \
+    pygsheets==2.0.3.1 \
     "
 
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
