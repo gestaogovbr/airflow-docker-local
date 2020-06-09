@@ -6,6 +6,7 @@ Imagem docker para ambiente de desenvolvimento local do Airflow.
 
 1. Instalar Docker CE [aqui!](https://docs.docker.com/get-docker/)
 2. Clonar o repositório [airflow-docker-local](https://git.economia.gov.br/seges-cginf/airflow-docker-local) na máquina
+> ```git clone http://git.planejamento.gov.br/seges-cginf/airflow-docker-local.git```
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o comando para gerar a imagem docker
 > ```docker build -t airflow-local .```
 4. Executar o comando para subir ambiente (na raiz do arquivo docker-compose.yml)
