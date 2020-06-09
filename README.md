@@ -24,12 +24,7 @@ Em seguida acesse a mesma tela no Airflow instalado localmente [(Admin >> Variab
 
 6. Criar as conexões no Airflow Local
 
-## Volumes
-
-* os arquivos de banco ficam persistidos em ```./mnt/pgdata```
-* as dags devem estar em um diretório paralelo a este chamado **airflow-dag**. Ou seja o Airflow está preparado para carregar as dags no diretório ```../airflow-dags```
-
-## Clonando o repositório de dags
+## Clonando o repositório de DAGs
 
 A partir deste diretório, execute:
 
@@ -38,6 +33,11 @@ A partir deste diretório, execute:
 ```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
 
 Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente. Como o Airflow já está em execução, ele identificará as novas DAGs e automaticamente exibirá na tela principal. Este resultado pode demorar algum tempo (menos de 1 min).
+
+## Volumes
+
+* Os arquivos de banco ficam persistidos em ```./mnt/pgdata```
+* As dags devem estar em um diretório paralelo a este chamado **airflow-dag**. Ou seja o Airflow está preparado para carregar as dags no diretório ```../airflow-dags```. Se você executou corretamente o passo anterior (Clonando o repositório de dags), este diretório já está devidamente criado.
 
 ## Instalação de bibliotecas
 
