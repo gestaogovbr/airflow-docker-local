@@ -22,6 +22,8 @@ ARG PYTHON_DEPS=" \
     pyodbc==4.0.30 \
     xlrd==1.2.0 \
     docker==4.2.1 \
+    pygsheets==2.0.3.1 \
+    python-slugify==3.0.3 \
     "
 
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
@@ -35,9 +37,6 @@ ENV LC_MESSAGES en_US.UTF-8
 
 # Disable noisy "Handling signal" log messages:
 # ENV GUNICORN_CMD_ARGS --log-level WARNING
-
-# Instala dependências
-COPY ./requirements.txt /requirements.txt
 
 RUN set -ex \
     && buildDeps=' \
@@ -66,7 +65,6 @@ RUN set -ex \
     vim \
     gnupg \
     apt-transport-https \
-    sudo \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
     && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
@@ -80,7 +78,6 @@ RUN set -ex \
     && pip install 'redis==3.2' \
     && pip install 'Flask-AppBuilder==2.3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
-    && pip install -r /requirements.txt \
     && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
     && apt-get update -yqq \
@@ -103,6 +100,10 @@ RUN set -ex \
 
 COPY script/entrypoint.sh /entrypoint.sh
 COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
+
+# Instala dependências
+COPY ./requirements.txt /requirements.txt
+RUN pip install -r /requirements.txt
 
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
