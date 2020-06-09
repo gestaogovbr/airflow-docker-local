@@ -15,6 +15,13 @@ Imagem docker para ambiente de desenvolvimento local do Airflow.
 > Se quiser acompanhar o log, ou iniciar o ambiente com o comando ```$ docker-compose up```, ou após iniciado com o comando acima executar o comando ```$ docker logs -f <<CONTAINER_ID>>```
 
 5. Exportar variáveis do Airflow produção e importar no Airflow Local
+
+No Airflow produção acesse a tela de cadastro de variáveis [(Admin >> Variables)](http://etl-cginflab.mp.intra/variable/list/), selecione todas as variáveis, e utilize a opção **Export** do menu Actions e faça download do arquivo:
+
+![Tela para exportação das variáveis](/doc/img/exportacao-variaveis.png)
+
+Em seguida acesse a mesma tela no Airflow instalado localmente [(Admin >> Variables)](http://localhost:8080/variable/list/) e utilize a opção **Import Variables**.
+
 6. Criar as conexões no Airflow Local
 
 ## Volumes
