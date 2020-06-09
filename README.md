@@ -37,7 +37,7 @@ A partir deste diretório, execute:
 
 ```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
 
-Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente
+Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente. Como o Airflow já está em execução, ele identificará as novas DAGs e automaticamente exibirá na tela principal. Este resultado pode demorar algum tempo (menos de 1 min).
 
 ## Instalação de bibliotecas
 
