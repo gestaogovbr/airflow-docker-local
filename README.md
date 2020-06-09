@@ -1,6 +1,10 @@
-# airflow-docker-local
+# Airflow de desenvolvimento da CGINF - Coordenação-Geral de Gestão de Informações
 
-Imagem docker para ambiente de desenvolvimento local do Airflow.
+Neste repositório estão os arquivos e orientações da instalação e configuração do ambiente Airflow utilizado pelos desenvolvedores da CGINF/SEGES.
+
+Este ambiente é similar ao de produção: utiliza a mesma versão do Airflow, instala os mesmo módulos extras do Airflow e as mesmas dependências python. Isso possibilita que o desenvolvimento seja realizado totalmente em ambiente local de forma compatível com o ambiente produção.
+
+Este repositório foi adaptado a partir da solução do Puckel disponível em https://github.com/puckel/docker-airflow.
 
 ## Preparação e execução
 
