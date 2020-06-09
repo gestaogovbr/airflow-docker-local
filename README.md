@@ -16,13 +16,17 @@ Imagem docker para ambiente de desenvolvimento local do Airflow.
 
 5. Exportar variáveis do Airflow produção e importar no Airflow Local
 
-No Airflow produção acesse a tela de cadastro de variáveis [(Admin >> Variables)](http://etl-cginflab.mp.intra/variable/list/), selecione todas as variáveis, e utilize a opção **Export** do menu Actions e faça download do arquivo:
+No Airflow produção acesse a tela de cadastro de variáveis ([Admin >> Variables](http://etl-cginflab.mp.intra/variable/list/)), selecione todas as variáveis, e utilize a opção **Export** do menu Actions e faça download do arquivo:
 
 ![Tela para exportação das variáveis](/doc/img/exportacao-variaveis.png)
 
 Em seguida acesse a mesma tela no Airflow instalado localmente [(Admin >> Variables)](http://localhost:8080/variable/list/) e utilize a opção **Import Variables**.
 
 6. Criar as conexões no Airflow Local
+
+Esta etapa é similar à anterior, porém, por motivos de segurança, não é possível realizar a exportação e importação das conexões. Dessa forma é necessário criar cada conexão na sua instalação do Airflow local. Todavia é possível listar e copiar todos os parâmetros de cada conexão com exceção do *password*. Para isso acesse no Airflow produção a tela de cadastro de conexões ([Admin >> Connectios](http://etl-cginflab.mp.intra/connection/list/)). Selecione e copie os parâmetros visíveis das conexões que você precisa utilizar, e solicite as devidas senhas aos colegas da equipe. Para visualizar os parâmetros clique no botão **Edit record**:
+
+![](/doc/img/tela-listagem-conexoes.png)
 
 ## Clonando o repositório de DAGs
 
