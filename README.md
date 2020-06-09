@@ -47,15 +47,15 @@ Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um dire
 * Os arquivos de banco ficam persistidos em ```./mnt/pgdata```
 * As dags devem estar em um diretório paralelo a este chamado **airflow-dag**. Ou seja o Airflow está preparado para carregar as dags no diretório ```../airflow-dags```. Se você executou corretamente o passo anterior (Clonando o repositório de dags), este diretório já está devidamente criado.
 
-## Instalação de bibliotecas
+## Instalação de bibliotecas Python
 
 Novas bibliotecas python podem ser instaladas adicionando o nome e versão (opcional) no arquivo ```./requirements.txt```
 
-## Para baixar o ambiente
+## Para desligar o ambiente Airflow
 
 > ```$ docker-compose down```
 
-## Para atualizar a imagem
+## Para atualizar a imagem docker
 
 > ```$ docker build --rm -t airflow-local .```
 
