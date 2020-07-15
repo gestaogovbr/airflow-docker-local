@@ -1,4 +1,4 @@
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
-lxml==4.5.1
+beautifulsoup4==4.9.1
