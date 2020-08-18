@@ -29,11 +29,11 @@ ARG PYTHON_DEPS=" \
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
 
 # Define pt_BR.
-ENV LANGUAGE pt_BR.UTF-8
-ENV LANG pt_BR.UTF-8
-ENV LC_ALL pt_BR.UTF-8
-ENV LC_CTYPE pt_BR.UTF-8
-ENV LC_MESSAGES pt_BR.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LC_CTYPE en_US.UTF-8
+ENV LC_MESSAGES en_US.UTF-8
 
 # Disable noisy "Handling signal" log messages:
 # ENV GUNICORN_CMD_ARGS --log-level WARNING
@@ -65,9 +65,10 @@ RUN set -ex \
     vim \
     gnupg \
     apt-transport-https \
+    && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
     && sed -i 's/^# pt_BR.UTF-8 UTF-8$/pt_BR.UTF-8 UTF-8/g' /etc/locale.gen \
-    && locale-gen pt_BR.UTF-8 \
-    && update-locale LANG=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8 \
+    && locale-gen en_US.UTF-8 pt_BR.UTF-8 \
+    && update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
     && useradd -ms /bin/bash -d ${AIRFLOW_USER_HOME} airflow \
     && pip install -U pip setuptools wheel \
     && pip install pytz \
