@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=1.10.10
+ARG AIRFLOW_VERSION=1.10.11
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=" \
@@ -46,7 +46,6 @@ RUN set -ex \
     libssl-dev \
     libffi-dev \
     libpq-dev \
-    git \
     unzip \
     ' \
     && apt-get update -yqq \
@@ -64,6 +63,7 @@ RUN set -ex \
     netcat \
     locales \
     vim \
+    git \
     gnupg \
     apt-transport-https \
     && sed -i 's/^# en_US.UTF-8 UTF-8$/en_US.UTF-8 UTF-8/g' /etc/locale.gen \
