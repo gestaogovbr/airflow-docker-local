@@ -4,3 +4,4 @@ google-auth-oauthlib
 beautifulsoup4==4.9.1
 ipdb==0.13.3
 py-trello==0.17.1
+PyPDF2==1.26.0
