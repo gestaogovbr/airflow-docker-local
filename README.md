@@ -6,7 +6,7 @@ Este ambiente é similar ao de produção: utiliza a mesma versão do Airflow, i
 
 Este repositório foi adaptado a partir da solução do Puckel disponível em https://github.com/puckel/docker-airflow.
 
-## Preparação e execução
+## Preparação e execução do Airflow
 
 1. Instalar Docker CE [aqui!](https://docs.docker.com/get-docker/)
 2. Clonar o repositório [airflow-docker-local](https://git.economia.gov.br/seges-cginf/airflow-docker-local) na máquina
@@ -18,7 +18,21 @@ Este repositório foi adaptado a partir da solução do Puckel disponível em ht
 
 > Se quiser acompanhar o log, ou iniciar o ambiente com o comando ```$ docker-compose up```, ou após iniciado com o comando acima executar o comando ```$ docker logs -f <<CONTAINER_ID>>```
 
-5. Exportar variáveis do Airflow produção e importar no Airflow Local
+## Rodando as DAGs da CGINF
+
+O segundo grande passo é configurar o Airflow para reconhecer todas as DAGs que são mantidas pela CGINF. As DAGs são matindas em um repositórios exclusivo que precisa ser clonado em um diretório ao lado (no mesmo nível) deste repositório. A partir do diretório corrente, execute:
+
+```$ cd ..```
+
+```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
+
+Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente. Como o Airflow já está em execução, ele identificará as novas DAGs e automaticamente exibirá na tela principal. Este resultado pode demorar algum tempo (menos de 1 min).
+
+## Configurações finais
+
+O Airflow possui módulos que possibilitam o isolamento de variáveis e conexões, permitindo maior flexibilidade na configuração das DAGs e a guarda segura (encriptada) das senhas utilizadas pelas DAGs para se conectarem com os inúmeros serviços. As variáveis podem ser copiadas facilmente do ambiente de produção, o que não é permitido com as conexões, por motivos óbvios.
+
+### Exportar variáveis do Airflow produção e importar no Airflow Local
 
 No Airflow produção acesse a tela de cadastro de variáveis ([Admin >> Variables](http://etl-cginflab.mp.intra/variable/list/)), selecione todas as variáveis, e utilize a opção **Export** do menu Actions e faça download do arquivo:
 
@@ -26,21 +40,11 @@ No Airflow produção acesse a tela de cadastro de variáveis ([Admin >> Variabl
 
 Em seguida acesse a mesma tela no Airflow instalado localmente [(Admin >> Variables)](http://localhost:8080/variable/list/) e utilize a opção **Import Variables**.
 
-6. Criar as conexões no Airflow Local
+### Criar as conexões no Airflow Local
 
 Esta etapa é similar à anterior, porém, por motivos de segurança, não é possível realizar a exportação e importação das conexões. Dessa forma é necessário criar cada conexão na sua instalação do Airflow local. Todavia é possível listar e copiar todos os parâmetros de cada conexão com exceção do *password*. Para isso acesse no Airflow produção a tela de cadastro de conexões ([Admin >> Connectios](http://etl-cginflab.mp.intra/connection/list/)). Selecione e copie os parâmetros visíveis das conexões que você precisa utilizar, e solicite as devidas senhas aos colegas da equipe. Para visualizar os parâmetros clique no botão **Edit record**:
 
 ![](/doc/img/tela-listagem-conexoes.png)
-
-## Clonando o repositório de DAGs
-
-A partir deste diretório, execute:
-
-```$ cd ..```
-
-```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
-
-Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente. Como o Airflow já está em execução, ele identificará as novas DAGs e automaticamente exibirá na tela principal. Este resultado pode demorar algum tempo (menos de 1 min).
 
 ## Volumes
 
