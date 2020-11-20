@@ -12,13 +12,13 @@ Este repositório foi adaptado a partir da solução do Puckel disponível em ht
 2. Clonar o repositório [airflow-docker-local](https://git.economia.gov.br/seges-cginf/airflow-docker-local) na máquina
 > ```$ git clone http://git.planejamento.gov.br/seges-cginf/airflow-docker-local.git```
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o comando para gerar a imagem docker
-> ```$ docker build -t airflow-local .```
+> ```$ docker build --rm -t airflow-local .```
 4. Executar o comando para subir ambiente (na raiz do arquivo docker-compose.yml)
 > ```$ docker-compose up -d```
 
 > Se quiser acompanhar o log, ou iniciar o ambiente com o comando ```$ docker-compose up```, ou após iniciado com o comando acima executar o comando ```$ docker logs -f <<CONTAINER_ID>>```
 
-## Rodando as DAGs da CGINF
+## Rodando as DAGs da CGINF/SEGES
 
 O segundo grande passo é configurar o Airflow para reconhecer todas as DAGs que são mantidas pela CGINF. As DAGs são matindas em um repositórios exclusivo que precisa ser clonado em um diretório ao lado (no mesmo nível) deste repositório. A partir do diretório corrente, execute:
 
@@ -28,9 +28,11 @@ O segundo grande passo é configurar o Airflow para reconhecer todas as DAGs que
 
 Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente. Como o Airflow já está em execução, ele identificará as novas DAGs e automaticamente exibirá na tela principal. Este resultado pode demorar algum tempo (menos de 1 min).
 
+Neste momento a interface web do Airlfow provavelmente apresentará uma lista enorme de erros. São erros indicando que o Airflow não consegue encontrar as variáveis e conexões utilizadas na compilação das DAGs. Para resolver é necessário cadastrar as variáveis e conexões no Airflow.
+
 ## Configurações finais
 
-O Airflow possui módulos que possibilitam o isolamento de variáveis e conexões, permitindo maior flexibilidade na configuração das DAGs e a guarda segura (encriptada) das senhas utilizadas pelas DAGs para se conectarem com os inúmeros serviços. As variáveis podem ser copiadas facilmente do ambiente de produção, o que não é permitido com as conexões, por motivos óbvios.
+O Airflow possui módulos que possibilitam o isolamento de **variáveis** e **conexões**, permitindo maior flexibilidade na configuração das DAGs e a guarda segura (encriptada) das senhas utilizadas pelas DAGs para se conectarem com os inúmeros serviços. As variáveis podem ser copiadas facilmente do ambiente de produção, o que não é permitido com as conexões, por motivos óbvios.
 
 ### Exportar variáveis do Airflow produção e importar no Airflow Local
 
@@ -42,7 +44,13 @@ Em seguida acesse a mesma tela no Airflow instalado localmente [(Admin >> Variab
 
 ### Criar as conexões no Airflow Local
 
-Esta etapa é similar à anterior, porém, por motivos de segurança, não é possível realizar a exportação e importação das conexões. Dessa forma é necessário criar cada conexão na sua instalação do Airflow local. Todavia é possível listar e copiar todos os parâmetros de cada conexão com exceção do *password*. Para isso acesse no Airflow produção a tela de cadastro de conexões ([Admin >> Connectios](http://etl-cginflab.mp.intra/connection/list/)). Selecione e copie os parâmetros visíveis das conexões que você precisa utilizar, e solicite as devidas senhas aos colegas da equipe. Para visualizar os parâmetros clique no botão **Edit record**:
+Esta etapa é similar à anterior, porém, por motivos de segurança, não é possível realizar a exportação e importação das conexões. Dessa forma é necessário criar cada conexão na sua instalação do Airflow local. Todavia é possível listar e copiar todos os parâmetros de cada conexão com exceção do *password*. Para isso acesse no Airflow produção a tela de cadastro de conexões ([Admin >> Connectios](http://etl-cginflab.mp.intra/connection/list/)). Selecione e copie os parâmetros visíveis das conexões que você precisa utilizar, e solicite as devidas senhas aos colegas da equipe.
+
+Se você seguiu todas as etapas até aqui, o Airflow ainda deve estar apresentando uma lista enorme de erros. Como explicado no parágrafo acima, daqui pra frente será necessário cadastrar as conexões no Airflow uma a uma, o que levará muito tempo, além de ser desnecessário para o desenvolvimento de uma nova DAG ou para dar manutenção em apenas uma DAG existente. Para reduzir drasticamente a lista de erros basta criar uma conexão do tipo **HTTP** com nome `slack`. Isso silenciará praticamente todos os erros.
+
+Uma rápida explicação é de que esta conexão chamada `slack` é utilizada por praticamente todas as nossas DAGs para envio de notificação em caso de falhas. Caso você execute localmente alguma DAG que implementa esta configuração, o seu Airflow  não enviará notificações de fato já que a conexão criada não possui nenhuma propriedade preenchida, com exceção do nome.
+
+Para visualizar os parâmetros de uma conexão registrada no Airflow produção, clique no botão **Edit record**:
 
 ![](/doc/img/tela-listagem-conexoes.png)
 
@@ -62,6 +70,8 @@ Novas bibliotecas python podem ser instaladas adicionando o nome e versão (opci
 ## Para atualizar a imagem docker
 
 > ```$ docker build --rm -t airflow-local .```
+
+Após isso você já pode subir novamente os containers!
 
 ---
 **Have fun!**
