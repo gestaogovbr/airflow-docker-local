@@ -11,6 +11,8 @@ Este repositório foi adaptado a partir da solução do Puckel disponível em ht
 1. Instalar Docker CE [aqui!](https://docs.docker.com/get-docker/)
 2. Clonar o repositório [airflow-docker-local](https://git.economia.gov.br/seges-cginf/airflow-docker-local) na máquina
 > ```$ git clone http://git.planejamento.gov.br/seges-cginf/airflow-docker-local.git```
+
+> ```$ cd airflow-docker-local```
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o comando para gerar a imagem docker
 > ```$ docker build --rm -t airflow-local .```
 4. Executar o comando para subir ambiente (na raiz do arquivo docker-compose.yml)
@@ -36,7 +38,7 @@ O Airflow possui módulos que possibilitam o isolamento de **variáveis** e **co
 
 ### Exportar variáveis do Airflow produção e importar no Airflow Local
 
-No Airflow produção acesse a tela de cadastro de variáveis ([Admin >> Variables](http://etl-cginflab.mp.intra/variable/list/)), selecione todas as variáveis, e utilize a opção **Export** do menu Actions e faça download do arquivo:
+No Airflow produção acesse a tela de cadastro de variáveis ([Admin >> Variables](http://airflow.seges.mp.intra/variable/list/)), selecione todas as variáveis, e utilize a opção **Export** do menu Actions e faça download do arquivo:
 
 ![Tela para exportação das variáveis](/doc/img/exportacao-variaveis.png)
 
@@ -44,7 +46,7 @@ Em seguida acesse a mesma tela no Airflow instalado localmente [(Admin >> Variab
 
 ### Criar as conexões no Airflow Local
 
-Esta etapa é similar à anterior, porém, por motivos de segurança, não é possível realizar a exportação e importação das conexões. Dessa forma é necessário criar cada conexão na sua instalação do Airflow local. Todavia é possível listar e copiar todos os parâmetros de cada conexão com exceção do *password*. Para isso acesse no Airflow produção a tela de cadastro de conexões ([Admin >> Connectios](http://etl-cginflab.mp.intra/connection/list/)). Selecione e copie os parâmetros visíveis das conexões que você precisa utilizar, e solicite as devidas senhas aos colegas da equipe.
+Esta etapa é similar à anterior, porém, por motivos de segurança, não é possível realizar a exportação e importação das conexões. Dessa forma é necessário criar cada conexão na sua instalação do Airflow local. Todavia é possível listar e copiar todos os parâmetros de cada conexão com exceção do *password*. Para isso acesse no Airflow produção a tela de cadastro de conexões ([Admin >> Connectios](http://airflow.seges.mp.intra/connection/list/)). Selecione e copie os parâmetros visíveis das conexões que você precisa utilizar, e solicite as devidas senhas aos colegas da equipe.
 
 Se você seguiu todas as etapas até aqui, o Airflow ainda deve estar apresentando uma lista enorme de erros. Como explicado no parágrafo acima, daqui pra frente será necessário cadastrar as conexões no Airflow uma a uma, o que levará muito tempo, além de ser desnecessário para o desenvolvimento de uma nova DAG ou para dar manutenção em apenas uma DAG existente. Para reduzir drasticamente a lista de erros basta criar uma conexão do tipo **HTTP** com nome `slack`. Isso silenciará praticamente todos os erros.
 
