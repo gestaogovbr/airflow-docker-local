@@ -34,7 +34,7 @@ Neste momento a interface web do Airlfow provavelmente apresentará uma lista en
 
 ## Importando o Framework FastETL (plugins)
 
-O FastETL é um pacote que contém diversos Plugins Airflow construídos por nós na CGINF. Praticamente todas as DAGs utilizam componentes do FastETL. A configuração a seguir vai reduzir a quantidade de inconsistência apresentadas na interface gráfica do Airflow.
+O [FastETL é um pacote que contém diversos Plugins Airflow](https://github.com/economiagovbr/FastETL) construídos por nós na CGINF. Praticamente todas as DAGs utilizam componentes do FastETL. A configuração a seguir vai reduzir a quantidade de inconsistência apresentadas na interface gráfica do Airflow.
 
 A partir do diretório corrente, execute:
 
