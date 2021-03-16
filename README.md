@@ -20,7 +20,7 @@ Este repositório foi adaptado a partir da solução do Puckel disponível em ht
 
 > Se quiser acompanhar o log, ou iniciar o ambiente com o comando ```$ docker-compose up```, ou após iniciado com o comando acima executar o comando ```$ docker logs -f <<CONTAINER_ID>>```
 
-## Rodando as DAGs da CGINF/SEGES
+## Importando as DAGs da CGINF/SEGES
 
 O segundo grande passo é configurar o Airflow para reconhecer todas as DAGs que são mantidas pela CGINF. As DAGs são matindas em um repositórios exclusivo que precisa ser clonado em um diretório ao lado (no mesmo nível) deste repositório. A partir do diretório corrente, execute:
 
@@ -30,7 +30,15 @@ O segundo grande passo é configurar o Airflow para reconhecer todas as DAGs que
 
 Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um diretório independente. Como o Airflow já está em execução, ele identificará as novas DAGs e automaticamente exibirá na tela principal. Este resultado pode demorar algum tempo (menos de 1 min).
 
-Neste momento a interface web do Airlfow provavelmente apresentará uma lista enorme de erros. São erros indicando que o Airflow não consegue encontrar as variáveis e conexões utilizadas na compilação das DAGs. Para resolver é necessário cadastrar as variáveis e conexões no Airflow.
+Neste momento a interface web do Airlfow provavelmente apresentará uma lista enorme de erros. São erros indicando que o Airflow não consegue encontrar os plugins, as variáveis e conexões utilizadas na compilação das DAGs. Para resolver prossiga com os passos seguintes.
+
+## Importando o Framework FastETL (plugins)
+
+O FastETL é um pacote que contém diversos Plugins Airflow construídos por nós na CGINF. Praticamente todas as DAGs utilizam componentes do FastETL. A configuração a seguir vai reduzir a quantidade de inconsistência apresentadas na interface gráfica do Airflow.
+
+A partir do diretório corrente, execute:
+
+```$ git clone https://github.com/economiagovbr/FastETL.git```
 
 ## Configurações finais
 
