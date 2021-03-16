@@ -32,7 +32,7 @@ services:
             - ../airflow-dags/dags:/usr/local/airflow/dags
             - ../tmp:/tmp # Mapeia volume para ser utilizado pelo DockerOperator como volume de troca de arquivos entre o container do airflow e o container do dockerOperator
             - ./requirements.txt:/requirements.txt
-            - ../airflow-dags/plugins:/usr/local/airflow/plugins
+            - ../FastETL:/usr/local/airflow/plugins
             - ../airflow-dags/great_expectations:/usr/local/airflow/great_expectations
             - /var/run/docker.sock:/var/run/docker.sock
             # Linux
