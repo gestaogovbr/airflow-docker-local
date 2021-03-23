@@ -25,7 +25,7 @@ ARG PYTHON_DEPS=" \
     pygsheets==2.0.3.1 \
     python-slugify==3.0.3 \
     pandas>=1 \
-    frictionless==3.29.0 \
+    frictionless==4.2.1 \
     "
 
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
