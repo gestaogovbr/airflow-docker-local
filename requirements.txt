@@ -1,9 +1,5 @@
 google-api-python-client
 google-auth-httplib2
 google-auth-oauthlib
-beautifulsoup4==4.9.1
-ipdb==0.13.3
-py-trello==0.17.1
-PyPDF2==1.26.0
 great-expectations==0.13.4
 airflow-provider-great-expectations==0.0.2

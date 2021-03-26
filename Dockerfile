@@ -11,21 +11,27 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TERM linux
 
 # Airflow
-ARG AIRFLOW_VERSION=1.10.10
+ARG AIRFLOW_VERSION=1.10.11
 ARG AIRFLOW_USER_HOME=/usr/local/airflow
 ARG AIRFLOW_DEPS=""
 ARG PYTHON_DEPS=" \
     ctds==1.12.0 \
     tqdm==4.46.0 \
     ijson==3.0.4 \
-    pysmb==1.1.27 \
+    pysmb==1.2.6 \
     pyodbc==4.0.30 \
     xlrd==1.2.0 \
     docker==4.2.1 \
     pygsheets==2.0.3.1 \
     python-slugify==3.0.3 \
-    pandas>=1 \
+    lxml==4.5.1 \
+    beautifulsoup4==4.9.1 \
+    ipdb==0.13.3 \
+    py-trello==0.17.1 \
+    PyPDF2==1.26.0 \
     frictionless==4.2.1 \
+    SQLAlchemy==1.3.23  \
+    Flask-SQLAlchemy==2.4.4 \
     "
 
 ENV AIRFLOW_HOME=${AIRFLOW_USER_HOME}
@@ -78,8 +84,8 @@ RUN set -ex \
     && pip install ndg-httpsclient \
     && pip install pyasn1 \
     && pip install apache-airflow[crypto,celery,postgres,ssh,jdbc,mysql,mssql,samba,slack,google_auth${AIRFLOW_DEPS:+,}${AIRFLOW_DEPS}]==${AIRFLOW_VERSION} \
-    && pip install 'redis==3.2' \
-    && pip install 'Flask-AppBuilder==2.3.2' \
+    # && pip install 'redis==3.2' \
+    # && pip install 'Flask-AppBuilder==2.3.2' \
     && if [ -n "${PYTHON_DEPS}" ]; then pip install ${PYTHON_DEPS}; fi \
     && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
     && curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list \
