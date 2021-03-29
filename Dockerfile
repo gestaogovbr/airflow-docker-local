@@ -114,6 +114,20 @@ COPY config/airflow.cfg ${AIRFLOW_USER_HOME}/airflow.cfg
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
 
+# instala pgodbc 9.3
+COPY script/odbc_config /odbc_config
+COPY config/psql_odbcini.txt /psql_odbcini.txt
+RUN apt-get update \
+    && apt-get install -yqq libpq-dev libssl-dev \
+    && chmod 777 /odbc_config \
+    && curl -O https://ftp.postgresql.org/pub/odbc/versions/src/psqlodbc-09.03.0400.tar.gz \
+    && tar -zxvf psqlodbc-09.03.0400.tar.gz \
+    && cd psqlodbc-09.03.0400 \
+    && ./configure --with-unixodbc=/odbc_config \
+    && make \
+    && make install \
+    && cat /psql_odbcini.txt >> /etc/odbcinst.ini
+
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
 EXPOSE 8080 5555 8793
