@@ -25,6 +25,17 @@ em https://github.com/puckel/docker-airflow.
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o
    comando para gerar a imagem docker
 > ```$ docker build --rm -t airflow-local .```
+   
+> Se o docker build retornar a mensagem ```error checking context: 'can't stat '/home/<user-linux>/.../airflow-docker-local/mnt/pgdata''.```, então executar:
+
+> ```sudo chown -R <user-linux> mnt/pgdata```
+
+> Para conferir se o build concluiu com sucesso:
+
+> ```docker images```
+
+> E verificar se a imagem 'airflow-local' latest foi gerada recentemente (CREATED).
+
 4. Executar o comando para subir ambiente (na raiz do arquivo
    docker-compose.yml)
 > ```$ docker-compose up -d```
