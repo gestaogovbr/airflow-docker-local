@@ -1,0 +1,50 @@
+version: '2.1'
+services:
+    postgres:
+        image: postgres:9.6
+        restart: 'no'
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./mnt/pgdata:/var/lib/postgresql/data/pgdata
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+
+    webserver:
+        image: airflow-local:latest
+        restart: 'no'
+        depends_on:
+            - postgres
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Local
+            - FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+        volumes:
+            - ../airflow-dags-detru/dags:/usr/local/airflow/dags
+            - ../tmp:/tmp # Mapeia volume para ser utilizado pelo DockerOperator como volume de troca de arquivos entre o container do airflow e o container do dockerOperator
+            - ./requirements.txt:/requirements.txt
+            - ../FastETL:/usr/local/airflow/plugins/FastETL
+            - ../airflow_commons:/usr/local/airflow/plugins/airflow_commons
+            # - ../airflow-dags/great_expectations:/usr/local/airflow/great_expectations
+            - /var/run/docker.sock:/var/run/docker.sock
+            # Linux
+            - /usr/bin/docker:/bin/docker:ro
+            # Mac
+            # - /usr/local/bin/docker:/bin/docker:ro
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3
