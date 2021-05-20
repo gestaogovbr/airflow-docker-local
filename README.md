@@ -173,7 +173,15 @@ versão (opcional) no arquivo ```./requirements.txt```
 
 ## Para desligar o ambiente Airflow
 
-> ```$ docker-compose down```
+> ```$ docker-compose -f docker-compose-cginf.yml down```
+
+ou
+
+> ```$ docker-compose -f docker-compose-delog.yml down```
+
+ou
+
+> ```$ docker-compose -f docker-compose-detru.yml down```
 
 ## Para atualizar a imagem docker
 
