@@ -25,7 +25,7 @@ em https://github.com/puckel/docker-airflow.
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o
    comando para gerar a imagem docker
 > ```$ docker build --rm -t airflow-local .```
-   
+
 > Se o docker build retornar a mensagem ```error checking context: 'can't stat '/home/<user-linux>/.../airflow-docker-local/mnt/pgdata''.```, então executar:
 
 > ```sudo chown -R <user-linux> mnt/pgdata```
@@ -36,47 +36,69 @@ em https://github.com/puckel/docker-airflow.
 
 > E verificar se a imagem 'airflow-local' latest foi gerada recentemente (CREATED).
 
-4. Executar o comando para subir ambiente (na raiz do arquivo
-   docker-compose.yml)
-> ```$ docker-compose up -d```
+Neste momento já é possível executar o Airflow. Porém ainda é necessário clonar mais outros repositórios, tanto os que contém **plugins** do Airflow assim como o repositório contendo as **DAGs** de fato.
 
-> Se quiser acompanhar o log, ou iniciar o ambiente com o comando ```$
-> docker-compose up```, ou após iniciado com o comando acima executar o
-> comando ```$ docker logs -f <<CONTAINER_ID>>```
+## Importando Plugins e DAGs
 
-## Importando as DAGs da CGINF/SEGES
+As DAGs desenvolvidas na Seges utilizam 2 frameworks (plugins). O **FastETL**, que está aberto no github e o **airflow_commons**.
 
-O segundo grande passo é configurar o Airflow para reconhecer todas as
-DAGs que são mantidas pela CGINF. As DAGs são matindas em um
-repositórios exclusivo que precisa ser clonado em um diretório ao lado
-(no mesmo nível) deste repositório. A partir do diretório corrente,
-execute:
+### Importe o Framework FastETL
 
-```$ cd ..```
-
-```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
-
-Isso fará o clone do repositório onde estão todas as DAGs da CGINF em um
-diretório independente. Como o Airflow já está em execução, ele
-identificará as novas DAGs e automaticamente exibirá na tela principal.
-Este resultado pode demorar algum tempo (menos de 1 min).
-
-Neste momento a interface web do Airlfow provavelmente apresentará uma
-lista enorme de erros. São erros indicando que o Airflow não consegue
-encontrar os plugins, as variáveis e conexões utilizadas na compilação
-das DAGs. Para resolver prossiga com os passos seguintes.
-
-## Importando o Framework FastETL (plugins)
-
-O
-[FastETL é um pacote que contém diversos Plugins Airflow](https://github.com/economiagovbr/FastETL)
-construídos por nós na CGINF. Praticamente todas as DAGs utilizam
-componentes do FastETL. A configuração a seguir vai reduzir a quantidade
-de inconsistência apresentadas na interface gráfica do Airflow.
+Esta é a parte mais organizada dos algoritmos e extensões do Airflow inventados pela equipe para realizar tarefas repetitivas dentro das DAGs, como a **carga incremental** de uma tabela entre BDs ou a **carga de uma planilha do google** em uma tabela no datalake.
 
 A partir do diretório corrente, execute:
 
+```$ cd ..```
+
 ```$ git clone https://github.com/economiagovbr/FastETL.git```
+
+### Importe o Framework airflow_commons
+
+Já este é o que podemos chamar de "versão *alpha* do FastETL" ou o "celeiro de novos plugins". Eventualmente você pode identificar um código repetido em várias DAGs. Caso aconteça, você deveria refatorar e criar um script no **airflow_commons**, e importá-lo nos diversos projetos. A evolução seria esta função ser levada oficialmente ao FastETL, para assim ser utilizada mais amplamente e melhor evoluída.
+
+A partir do diretório corrente, execute:
+
+```$ git clone http://git.planejamento.gov.br/seges-cginf/airflow_commons.git```
+### Importe o repositório de DAGs do seu interesse
+
+Atualmente a SEGES possui 3 repositórios onde estão organizadas as DAGs do DETRU, do DELOG e da CGINF e demais unidades:
+
+* CGINF - https://git.economia.gov.br/seges-cginf/airflow-dags/
+* DELOG - https://git.economia.gov.br/seges/airflow-dags-delog/
+* DETRU - https://git.economia.gov.br/seges/airflow-dags-detru/
+
+Para clonar o repositório da **CGINF**, execute:
+
+```$ git clone http://git.economia.gov.br/seges-cginf/airflow-dags.git```
+
+Para clonar o repositório do **DELOG**, execute:
+
+```$ git clone http://git.economia.gov.br/seges/airflow-dags-delog.git```
+
+Para clonar o repositório do **DETRU**, execute:
+
+```$ git clone http://git.economia.gov.br/seges/airflow-dags-detru.git```
+
+## Executar o Airflow
+
+A execução é feita de forma isolada por repositório de DAGs.
+
+Para subir o Airflow com as dags da CGINF, execute:
+
+> ```$ docker-compose -f docker-compose-cginf.yml up -d```
+
+Para subir o Airflow com as dags do DELOG, execute:
+
+> ```$ docker-compose -f docker-compose-delog.yml up -d```
+
+Para subir o Airflow com as dags do DETRU, execute:
+
+> ```$ docker-compose -f docker-compose-detru.yml up -d```
+
+
+Acesse o Airflow em http://localhost:8080/ o/
+
+Neste momento a interface web do Airlfow provavelmente apresentará uma lista enorme de erros. São erros indicando que o Airflow não consegue encontrar as variáveis e conexões utilizadas na compilação das DAGs. Para resolver prossiga com os passos seguintes.
 
 ## Configurações finais
 
