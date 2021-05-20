@@ -40,11 +40,11 @@ Neste momento já é possível executar o Airflow. Porém ainda é necessário c
 
 ## Importando Plugins e DAGs
 
-As DAGs desenvolvidas na Seges utilizam 2 frameworks (plugins). O **FastETL**, que está aberto no github e o **airflow_commons**.
+As DAGs desenvolvidas na Seges utilizam 2 frameworks (plugins). O **FastETL**, que está aberto no github, e o **airflow_commons**.
 
 ### Importe o Framework FastETL
 
-Esta é a parte mais organizada dos algoritmos e extensões do Airflow inventados pela equipe para realizar tarefas repetitivas dentro das DAGs, como a **carga incremental** de uma tabela entre BDs ou a **carga de uma planilha do google** em uma tabela no datalake.
+Este plugin é a parte mais organizada dos algoritmos e extensões do Airflow inventados pela equipe para realizar tarefas repetitivas dentro das DAGs, como a **carga incremental** de uma tabela entre BDs ou a **carga de uma planilha do google** em uma tabela no datalake.
 
 A partir do diretório corrente, execute:
 
@@ -81,7 +81,9 @@ Para clonar o repositório do **DETRU**, execute:
 
 ## Executar o Airflow
 
-A execução é feita de forma isolada por repositório de DAGs.
+A execução é feita de forma isolada por repositório de DAGs. Acesse o repositório do ambiente local:
+
+> ```$ cd airflow-docker-local```
 
 Para subir o Airflow com as dags da CGINF, execute:
 
