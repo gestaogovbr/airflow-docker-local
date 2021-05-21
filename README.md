@@ -1,8 +1,8 @@
-# Airflow de desenvolvimento da CGINF - Coordenação-Geral de Gestão de Informações
+# Ambiente Airflow de desenvolvimento da SEGES - Secretaria de Gestão
 
-Neste repositório estão os arquivos e orientações da instalação e
+Neste repositório estão os códigos e instruções da instalação e
 configuração do ambiente Airflow utilizado pelos desenvolvedores da
-CGINF/SEGES.
+SEGES.
 
 Este ambiente é similar ao de produção: utiliza a mesma versão do
 Airflow, instala os mesmo módulos extras do Airflow e as mesmas
