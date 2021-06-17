@@ -17,9 +17,9 @@ em https://github.com/puckel/docker-airflow.
 
 1. Instalar Docker CE [aqui!](https://docs.docker.com/get-docker/)
 2. Clonar o repositório
-   [airflow-docker-local](https://git.economia.gov.br/seges-cginf/airflow-docker-local)
+   [airflow-docker-local](https://github.com/economiagovbr/airflow-docker-local)
    na máquina
-> ```$ git clone http://git.planejamento.gov.br/seges-cginf/airflow-docker-local.git```
+> ```$ git clone git@github.com:economiagovbr/airflow-docker-local.git```
 
 > ```$ cd airflow-docker-local```
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o
