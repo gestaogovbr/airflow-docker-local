@@ -3,3 +3,5 @@ google-auth-httplib2
 google-auth-oauthlib
 great-expectations==0.13.4
 airflow-provider-great-expectations==0.0.2
+odfpy==1.4.1
+Markdown==3.3.4
