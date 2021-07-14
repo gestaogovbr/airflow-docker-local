@@ -6,3 +6,4 @@ airflow-provider-great-expectations==0.0.2
 odfpy==1.4.1
 Markdown==3.3.4
 openpyxl==3.0.7
+Unidecode==1.2.0
