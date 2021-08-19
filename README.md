@@ -19,7 +19,7 @@ em https://github.com/puckel/docker-airflow.
 2. Clonar o repositório
    [airflow-docker-local](https://github.com/economiagovbr/airflow-docker-local)
    na máquina
-> ```$ git clone git@github.com:economiagovbr/airflow-docker-local.git```
+> ```$ git clone https://github.com/economiagovbr/airflow-docker-local.git```
 
 > ```$ cd airflow-docker-local```
 3. Dentro da pasta clonada (na raiz do arquivo Dockerfile), executar o
