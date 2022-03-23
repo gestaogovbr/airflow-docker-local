@@ -1,3 +1,8 @@
+⚠️ Aviso: este ambiente usa a versão 1.10.11 do Airflow e não é mais
+suportado e nem utilizado. Para a versão mais recente, utilize o
+repositório
+[airflow2-docker](https://github.com/economiagovbr/airflow2-docker).
+
 # Ambiente Airflow de desenvolvimento da SEGES - Secretaria de Gestão
 
 Neste repositório estão os códigos e instruções da instalação e
